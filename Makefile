@@ -38,6 +38,7 @@ endif
 
 all: \
 	esc35-v1 \
+	jdrone-uc4h-v2 \
 	px4cannode-v1 \
 	px4esc-v1 \
 	px4flow-v2 \
