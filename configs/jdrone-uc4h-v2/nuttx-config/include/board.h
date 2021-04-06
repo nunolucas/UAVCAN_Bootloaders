@@ -1,5 +1,5 @@
 /************************************************************************************
- * nuttx-configs/px4cannode-v1/include/board.h
+ * nuttx-configs/jdrone-uc4h-v2/include/board.h
  *
  *   Copyright (C) 2015 Gregory Nutt. All rights reserved.
  *   Author: Gregory Nutt <gnutt@nuttx.org>
@@ -34,8 +34,8 @@
  *
  ************************************************************************************/
 
-#ifndef __CONFIGS_PX4CANNODE_V1_INCLUDE_BOARD_H
-#define __CONFIGS_PX4CANNODE_V1_INCLUDE_BOARD_H
+#ifndef __CONFIGS_JDRONE_UC4H_V2_INCLUDE_BOARD_H
+#define __CONFIGS_JDRONE_UC4H_V2_INCLUDE_BOARD_H
 
 /************************************************************************************
  * Included Files
@@ -132,23 +132,17 @@
 
 /* Buttons *************************************************************************/
 
-#define BUTTON_BOOT0_BIT  (0)
-#define BUTTON_BOOT0_MASK (1<<BUTTON_BOOT0_BIT)
-
 /* Leds *************************************************************************/
 
 /* LED index values for use with board_setled() */
 
 #define BOARD_LED1                0
 #define BOARD_LED_GREEN           BOARD_LED1
-#define BOARD_LED2                1
-#define BOARD_LED_YELLOW          BOARD_LED2
-#define BOARD_NLEDS               2
+#define BOARD_NLEDS               1
 
 /* LED bits for use with board_setleds() */
 
 #define BOARD_LED_GREEN_BIT     (1 << BOARD_LED_GREEN)
-#define BOARD_LED_YELLOW_BIT    (1 << BOARD_LED_YELLOW)
 
 /* These LEDs are not used by the board port unless CONFIG_ARCH_LEDS is
  * defined.  In that case, the usage by the board port is as follows:
@@ -178,6 +172,9 @@
 
 
 #if defined(CONFIG_BOARD_USE_PROBES)
+
+# error "TODO" // Pins C1..C3 not available for this MCU
+
 # define PROBE_N(n) (1<<((n)-1))
 # define PROBE_1        (GPIO_OUTPUT|GPIO_CNF_OUTPP | GPIO_MODE_50MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTC|GPIO_PIN1)
 # define PROBE_2        (GPIO_OUTPUT|GPIO_CNF_OUTPP | GPIO_MODE_50MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTC|GPIO_PIN2)
@@ -256,4 +253,4 @@ int app_archinitialize(void);
 #endif
 
 #endif /* __ASSEMBLY__ */
-#endif /* __CONFIGS_PX4CANNODE_V1_INCLUDE_BOARD_H */
+#endif /* __CONFIGS_JDRONE_UC4H_V2_INCLUDE_BOARD_H */

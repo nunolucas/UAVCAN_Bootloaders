@@ -51,6 +51,7 @@ freedom-kl25z           MKL25Z128VLK4 MCU – 48 MHz, 128 KB flash, 16 KB SRAM, 
 freedom-kl26z           MKL26Z128VLH4 MCU – 48 MHz, 128 KB flash, 16 KB SRAM, USB OTG (FS), 64 LQFP
 S2740VC - v1.2          STM32F302K8U6
 esc35 - v1.0            STM32F303CC
+jDrone-UC4H - v2.1      STM32F103TBU6
 
 Using:
 Part Number Package Marketing Status  Core  Operating Frequency(F) (Processor speed)  FLASH Size (Prog) Data E2PROM nom (B) Internal RAM Size 16-bit timers (IC/OC/PWM) 32-bit timer (IC/OC/PWM)  Other timer functions A/D Converter I/Os (High Current) Display controller  D/A Converter Integrated op-amps    Serial Interface                        Supply Current(Icc) (Lowest power mode) typ (µA)  Supply Current(Icc) (Run mode (per Mhz)) typ (µA) Operating Temperature min (°C)  Operating Temperature max (°C)

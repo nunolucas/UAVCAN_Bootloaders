@@ -1138,7 +1138,7 @@ __EXPORT int main(int argc, char *argv[])
 	 *  by the state of the jumper
 	 *
 	 */
-#if defined(OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO)
+#if defined(OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO) && OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO
 	bootloader.wait_for_getnodeinfo = (stm32_gpioread(GPIO_GETNODEINFO_JUMPER) ^
 					   OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO_INVERT);
 #endif

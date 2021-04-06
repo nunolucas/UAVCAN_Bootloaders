@@ -48,7 +48,6 @@
 #include <arch/board/board.h>
 
 #include <nuttx/board.h>
-#include "led.h"
 
 
 /****************************************************************************
@@ -94,16 +93,16 @@ __EXPORT void stm32_boardinitialize(void)
 	putreg32(getreg32(STM32_RCC_APB1ENR) | RCC_APB1ENR_CAN1EN, STM32_RCC_APB1ENR);
 	stm32_configgpio(GPIO_CAN1_RX);
 	stm32_configgpio(GPIO_CAN1_TX);
-	stm32_configgpio(GPIO_CAN_CTRL);
 	putreg32(getreg32(STM32_RCC_APB1RSTR) | RCC_APB1RSTR_CAN1RST,
 		 STM32_RCC_APB1RSTR);
 	putreg32(getreg32(STM32_RCC_APB1RSTR) & ~RCC_APB1RSTR_CAN1RST,
 		 STM32_RCC_APB1RSTR);
 
-#if defined(OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO)
+#if defined(OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO) && OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO
 	stm32_configgpio(GPIO_GETNODEINFO_JUMPER);
 #endif
 
+	stm32_configgpio(GPIO_LED_GREEN);
 }
 
 /************************************************************************************
@@ -185,36 +184,26 @@ size_t board_get_hardware_version(uavcan_HardwareVersion_t *hw_version)
  *   None
  *
  ****************************************************************************/
-#define led(n, code, r , g , b, h) {.red = (r),.green = (g), .blue = (b),.hz = (h)}
 
-typedef begin_packed_struct struct led_t {
-	uint16_t red    :       5;
-	uint16_t green  :       6;
-	uint16_t blue   :       5;
-	uint8_t hz;
-} end_packed_struct led_t;
+#define led(n, code, on_off) 	(on_off)
 
-static const  led_t i2l[] = {
-
-	led(0, off,                             0,    0,    0,     0),
-	led(1, reset,                          10,   63,   31,   255),
-	led(2, autobaud_start,                  0,   63,    0,     1),
-	led(3, autobaud_end,                    0,   63,    0,     2),
-	led(4, allocation_start,                0,    0,   31,     2),
-	led(5, allocation_end,                  0,   63,   31,     3),
-	led(6, fw_update_start,                15,   63,   31,     3),
-	led(7, fw_update_erase_fail,           15,   63,   15,     3),
-	led(8, fw_update_invalid_response,     31,    0,    0,     1),
-	led(9, fw_update_timeout,              31,    0,    0,     2),
-	led(a, fw_update_invalid_crc,          31,    0,    0,     4),
-	led(b, jump_to_app,                     0,   63,    0,    10),
-
+// LED will be ON on success before jumping to application, OFF on error
+static const bool i2l[] = {
+	led(0, off,                           	false),
+	led(1, reset,                           true),
+	led(2, autobaud_start,                  false),
+	led(3, autobaud_end,                    true),
+	led(4, allocation_start,                false),
+	led(5, allocation_end,                  true),
+	led(6, fw_update_start,                 false),
+	led(7, fw_update_erase_fail,            false),
+	led(8, fw_update_invalid_response,     	false),
+	led(9, fw_update_timeout,               false),
+	led(a, fw_update_invalid_crc,           false),
+	led(b, jump_to_app,                     true),
 };
 
 void board_indicate(uiindication_t indication)
 {
-	rgb_led(i2l[indication].red << 3,
-		i2l[indication].green << 2,
-		i2l[indication].blue << 3,
-		i2l[indication].hz);
+	stm32_gpiowrite(GPIO_LED_GREEN, i2l[indication]);
 }
