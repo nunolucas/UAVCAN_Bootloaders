@@ -1,5 +1,5 @@
 /****************************************************************************
- * nuttx-configs/px4cannode-v1/scripts/bootloaderld.script
+ * nuttx-configs/jdrone-uc4h-v2/scripts/bootloaderld.script
  *
  *   Copyright (C) 2015 Gregory Nutt. All rights reserved.
  *   Author: Gregory Nutt <gnutt@nuttx.org>
@@ -33,7 +33,7 @@
  *
  ****************************************************************************/
 
-/* The STM32F103RB has 128Kb of FLASH beginning at address 0x0800:0000 and
+/* The STM32F103xB has 128Kb of FLASH beginning at address 0x0800:0000 and
  * 20KiB of SRAM beginning at address 0x2000:0000.  When booting from FLASH,
  * FLASH memory is aliased to address 0x0000:0000 where the code expects to
  * begin execution by jumping to the entry point in the 0x0800:0000 address
@@ -93,7 +93,7 @@ SECTIONS
 
   _eronly = ABSOLUTE(.);
 
-  /* The STM32F103CB has 20Kb of SRAM beginning at the following address */
+  /* The STM32F103xB has 20Kb of SRAM beginning at the following address */
 
   .data : {
     _sdata = ABSOLUTE(.);

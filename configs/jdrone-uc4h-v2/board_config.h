@@ -34,7 +34,7 @@
 /**
  * @file board_config.h
  *
- * PX4CANNODEv1 internal definitions
+ * JDRONE_UC4H_V2 internal definitions
  */
 
 #pragma once
@@ -71,79 +71,24 @@
  *                                                          Pin #      Name
  * -- ----- --------------------------------             ----------------------------
  *
- *  PA[05] PA5/SPI1_SCK/ADC5                                21       D13(SCK1/LED1)
- *  PA[01] PA1/USART2_RTS/ADC1/TIM2_CH2                     15       D3(LED2)
+ * PA [04]  PA4/SPI1_NSS/USART2_CK/ADC12_IN4                11       LED (green LED2)
  */
 
 #define GPIO_LED1       (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-			 GPIO_PORTA | GPIO_PIN5 | GPIO_OUTPUT_CLEAR)
+			 GPIO_PORTA | GPIO_PIN4 | GPIO_OUTPUT_CLEAR)
 #define GPIO_LED_GREEN  GPIO_LED1
-#define GPIO_LED2       (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-			 GPIO_PORTA | GPIO_PIN1 | GPIO_OUTPUT_CLEAR)
-#define GPIO_LED_YELLOW GPIO_LED2
 
-/* BUTTON ***************************************************************************
+/* CAN ******************************************************************************
  *
  *   GPIO      Function                                     MPU        Board
  *                                                          Pin #      Name
  * -- ----- --------------------------------             ----------------------------
  *
- *  PC[09] PC9/TIM3_CH4                                     40       BOOT0
- *
+ * PA [11]  PA11/USART1_CTS/CANRX/USBDM/TIM1_CH4            23       CANRX
+ * PA [12]  PA12/USART1_RTS/CANTX/USBDP/TIM1_ETR            24       CANTX
  */
 
-#define BUTTON_BOOT0n   (GPIO_INPUT | GPIO_CNF_INFLOAT | GPIO_PORTC | GPIO_PIN9 | \
-			 GPIO_EXTI)
-#define IRQBUTTON       BUTTON_BOOT0_BIT
-
-/* USBs *****************************************************************************
- *
- *   GPIO      Function                                     MPU        Board
- *                                                          Pin #      Name
- * -- ----- --------------------------------             ----------------------------
- *
- *  PC[11] PC11/USART3_RX                                   52       USB_P
- *  PC[12] PC12/USART3_CK                                   53       DISC
- *
- */
-
-#define GPIO_USB_VBUS    (GPIO_INPUT | GPIO_CNF_INFLOAT | GPIO_PORTC | GPIO_PIN11)
-#define GPIO_USB_PULLUPn (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-			  GPIO_PORTC | GPIO_PIN12 | GPIO_OUTPUT_SET)
-
-/* SPI ***************************************************************************
- *
- *   GPIO      Function                                     MPU        Board
- *                                                          Pin #      Name
- * -- ----- --------------------------------             ----------------------------
- *
- *  PC[09] PA4/SPI1_NSS/USART2_CK/ADC4                      20       D10(#SS1)
- *  PD[02] PD2/TIM3_ETR                                     54       D25(MMC_CS)
- */
-
-#define GPIO_SPI1_SSn (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-		       GPIO_PORTC | GPIO_PIN9 | GPIO_OUTPUT_SET)
-#define USER_CSn      GPIO_SPI1_SSn
-
-#define GPIO_SPI2_SSn (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-		       GPIO_PORTD | GPIO_PIN2 | GPIO_OUTPUT_SET)
-#define MMCSD_CSn     GPIO_SPI2_SSn
-
-/* CAN ***************************************************************************
- *
- *   GPIO      Function                                     MPU        Board
- *                                                          Pin #      Name
- * -- ----- --------------------------------             ----------------------------
- *
- *  PB[08] PB8/TIM4_CH3/I2C1_SCL/CANRX                      61       D14(CANRX)
- *  PB[09] PB9/TIM4_CH4/I2C1_SDA/CANTX                      62       D24(CANTX)
- *  PC[13] PC13/ANTI_TAMP                                   2        D21(CAN_CTRL)
- */
-
-#define GPIO_CAN_CTRL (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-		       GPIO_PORTC | GPIO_PIN13 | GPIO_OUTPUT_CLEAR)
-
-#define BOARD_NAME "PX4CANNODE_V1"
+#define BOARD_NAME "JDRONE_UC4H_V2"
 
 __BEGIN_DECLS
 

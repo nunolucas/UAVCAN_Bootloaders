@@ -89,8 +89,13 @@
  *   no            0                       1       Not Active
  *
  */
+
+// Not set here as we have no jumper pin available for this.
+// We rely on either the application jumping into the bootloader or the
+// bootloader not finding a valid application to run.
+
 #define OPT_WAIT_FOR_GETNODEINFO                    0
-#define OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO        1
+#define OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO        0
 #define OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO_INVERT 0
 
 #define OPT_ENABLE_WD           1
@@ -102,8 +107,11 @@
 
 /* Reserved for the application out of the total
  * system flash minus the BOOTLOADER_SIZE_IN_K
+ *
+ * This is reserved by our application for parameter storage.
+ * TODO: Make independent from the app - maybe store the image length in the app meta-data?
  */
-#define OPT_APPLICATION_RESERVER_IN_K    0
+#define OPT_APPLICATION_RESERVER_IN_K    (1024*1)
 
 #define OPT_APPLICATION_IMAGE_OFFSET    OPT_BOOTLOADER_SIZE_IN_K
 #define OPT_APPLICATION_IMAGE_LENGTH    (FLASH_SIZE-(OPT_BOOTLOADER_SIZE_IN_K+OPT_APPLICATION_RESERVER_IN_K))
@@ -136,4 +144,5 @@
  * -- ----- --------------------------------             ----------------------------
  *  *  PC[09] PC9/TIM3_CH4                                     40       BOOT0
  */
-#define GPIO_GETNODEINFO_JUMPER (BUTTON_BOOT0n&~(GPIO_EXTI))
+
+// #define GPIO_GETNODEINFO_JUMPER (BUTTON_BOOT0n&~(GPIO_EXTI))
